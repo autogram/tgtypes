@@ -2,14 +2,14 @@
 name = "tgtypes"
 version = "0.1.0"
 packages = [
-    { include = "tgintegration" }
+    { include = "tgtypes" }
 ]
 description = "Unified Python models for Telegram Messenger."
 authors = ["JosXa <joscha.goetzer@gmail.com>"]
 license = "MIT"
 readme = "README.md"
 repository = "https://github.com/JosXa/tgintegration"
-keywords = ["telegram-bots", "testing", "integration-tests", "library", "python"]
+keywords = ["telegram", "python3", "models", "abstractions"]
 classifiers = [
     "Typing :: Typed",
     "Topic :: Software Development :: Libraries :: Python Modules",
@@ -20,7 +20,7 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.7"
 pydantic = { version = "^1.6.1" }
 "ruamel.yaml" = "^0.16.12"
 
