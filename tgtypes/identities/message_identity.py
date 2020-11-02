@@ -1,17 +1,10 @@
-from typing import Literal, Optional, Protocol, Union, runtime_checkable
+from typing import Optional, Protocol, Union, runtime_checkable
+from warnings import warn
 
-from pydantic import BaseModel, ValidationError
+from pydantic import ValidationError
 from pydantic.dataclasses import dataclass
-from pyrogram.handlers import RawUpdateHandler
 
-from botkit.utils.botkit_logging.setup import create_logger
-
-log = create_logger()
-
-
-class Chat(Protocol):
-    id: int
-    type: Literal["private", "bot", "group", "supergroup", "channel"]
+from tgtypes.chat import Chat
 
 
 @runtime_checkable
@@ -46,7 +39,9 @@ class MessageIdentity:
     is_deleted: bool = False  # TODO: implement
 
     @classmethod
-    def from_update(cls, update: Union[_MessageUpdate, _CallbackQueryUpdate]) -> "MessageIdentity":
+    def from_update(
+        cls, update: Union[_MessageUpdate, _CallbackQueryUpdate]
+    ) -> Optional["MessageIdentity"]:
         if isinstance(update, _MessageUpdate):
             return cls.from_message(update)
         elif isinstance(update, _CallbackQueryUpdate) and update.inline_message_id:
@@ -56,7 +51,7 @@ class MessageIdentity:
         elif isinstance(update, _AnyUpdateWithMessageProperty) and update.message:
             return cls.from_message(update.message)
 
-        log.error(f"Could not extract a message location from update.")
+        return None
 
     @classmethod
     def from_message(cls, message: _MessageUpdate):
@@ -74,7 +69,7 @@ class MessageIdentity:
                 chat_id=chat_id, message_id=update.inline_message_id, is_inline=True
             )
         except ValidationError:
-            log.exception("Could not extract message identity from chosen inline result.")
+            warn("Could not extract message identity from chosen inline result.")
             return None
 
 

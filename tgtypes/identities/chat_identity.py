@@ -2,15 +2,14 @@ from typing import Literal, Optional, Tuple, Union
 
 from pydantic import BaseModel
 
-from botkit.future_tgtypes.identities.message_identity import Chat
-from botkit.future_tgtypes.user import User
-from botkit.utils.botkit_logging.setup import create_logger
+from tgtypes.identities.message_identity import Chat
+from tgtypes.user import User
 
-log = create_logger("chat_identity")
+ChatType = Literal["private", "bot", "group", "supergroup", "channel"]
 
 
 class ChatIdentity(BaseModel):
-    type: Literal["private", "bot", "group", "supergroup", "channel"]
+    type: ChatType
     peers: Union[int, Tuple[int, int]]  # will be a tuple if conversation is `private` or `bot`
 
     class Config:
@@ -22,7 +21,6 @@ class ChatIdentity(BaseModel):
         cls, chat: Optional[Chat], user: User, client_user_id: int
     ) -> "Optional[ChatIdentity]":
         if not chat:
-            log.debug("No chat found in update. This is most likely due to an inline message.")
             return None
         type_ = chat.type
         chat_id = chat.id

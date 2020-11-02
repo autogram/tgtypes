@@ -1,6 +1,6 @@
-from typing import Any, Literal, Protocol, Union
+from typing import Literal, Protocol
 
 
 class Chat(Protocol):
     id: int
-    type: Union[Literal["private", "bot"], str]  # TODO: fill
+    type: Literal["private", "bot", "group", "supergroup", "channel"]

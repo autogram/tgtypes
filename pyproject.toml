@@ -24,6 +24,7 @@ python = "^3.7"
 pydantic = { version = "^1.6.1" }
 #"ruamel.yaml" = "^0.16.12"
 
+loguru = "^0.5.3"
 [tool.poetry.dev-dependencies]
 black = { version = ">=20.8b1", python = "^3.8", markers = "platform_python_implementation == 'CPython'" }
 mypy = ">0.770"
@@ -35,6 +36,8 @@ pytest-asyncio = "*"
 pytest-cov = "^2.10.1"
 pre-commit = "^2.7.1"
 devtools = { extras = ["pygments"], version = "^0.6" }
+pytest-mock = "^3.3.1"
+asynctest = "^0.13.0"
 
 
 [build-system]

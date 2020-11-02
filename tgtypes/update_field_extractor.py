@@ -4,17 +4,17 @@ from dataclasses import dataclass
 from typing import *
 
 import pyrogram.types
-from pyrogram.types import Update
-
-from botkit.future_tgtypes.chat import Chat
-from botkit.future_tgtypes.identities.chat_identity import ChatIdentity
-from botkit.future_tgtypes.message import Message
-from botkit.future_tgtypes.identities.message_identity import MessageIdentity
 from botkit.tghelpers.entities.message_entities import (
     MessageEntityType,
     ParsedEntity,
     parse_entities,
 )
+from pyrogram.types import Update
+
+from tgtypes.chat import Chat
+from tgtypes.identities.chat_identity import ChatIdentity
+from tgtypes.identities.message_identity import MessageIdentity
+from tgtypes.message import Message
 
 if TYPE_CHECKING:
     from botkit.clients.client import IClient

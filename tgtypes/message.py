@@ -1,6 +1,6 @@
 from typing import *
 
-from botkit.future_tgtypes.user import User
+from tgtypes.user import User
 
 
 class Message(Protocol):

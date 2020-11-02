@@ -1,6 +1,6 @@
-from pydantic import BaseModel
-from pyrogram.types import Message
 from typing import Optional
+
+from pydantic import BaseModel
 
 
 class TextMessageModel(BaseModel):
@@ -56,7 +56,7 @@ class TextMessageModel(BaseModel):
     # ] = none
 
     @classmethod
-    def from_message(cls, msg: Message) -> "TextMessageModel":
+    def from_message(cls, msg) -> "TextMessageModel":
         if msg.empty:
             raise ValueError("view_sender_interface is empty.")
         if msg.service:
