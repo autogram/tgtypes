@@ -24,7 +24,7 @@ python = "^3.7"
 pydantic = { version = "^1.6.1" }
 #"ruamel.yaml" = "^0.16.12"
 
-loguru = "^0.5.3"
+typing-extensions = "^3.7.4"
 [tool.poetry.dev-dependencies]
 black = { version = ">=20.8b1", python = "^3.8", markers = "platform_python_implementation == 'CPython'" }
 mypy = ">0.770"
