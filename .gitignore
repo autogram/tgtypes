@@ -117,3 +117,4 @@ dmypy.json
 .idea
 /botkit.egg-info/
 /tests/configuration/*.session
+/junit/test-results-3.8.xml
