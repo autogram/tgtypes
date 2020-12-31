@@ -3,7 +3,7 @@ from typing import Literal, Optional, Tuple, Union
 from pydantic import BaseModel
 
 from tgtypes.identities.message_identity import Chat
-from tgtypes.user import User
+from tgtypes.protocols.user import User
 
 ChatType = Literal["private", "bot", "group", "supergroup", "channel"]
 

@@ -1,0 +1,6 @@
+- on:
+    command: /id
+    is_reply: True
+  gather:
+    via: @JosXaBot
+

@@ -4,7 +4,7 @@ from warnings import warn
 from pydantic import ValidationError
 from pydantic.dataclasses import dataclass
 
-from tgtypes.chat import Chat
+from tgtypes.protocols.chat import Chat
 
 
 @runtime_checkable

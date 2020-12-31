@@ -20,24 +20,19 @@ class ChatDescriptor(Descriptor[ChatIdentity]):
     async def resolve(self, resolver: IChatResolver) -> ChatIdentity:
         identity = None
 
-        try:
-            if self.username and (
-                identity := await resolver.resolve_chat_by_username(self.username)
-            ):
-                return identity
+        if self.username and (identity := await resolver.resolve_chat_by_username(self.username)):
+            return identity
 
-            if self.chat_id and (identity := await resolver.resolve_chat_by_chat_id(self.chat_id)):
-                return identity
+        if self.chat_id and (identity := await resolver.resolve_chat_by_chat_id(self.chat_id)):
+            return identity
 
-            if self.title_regex:
-                if (
-                    identity := await resolver.resolve_chat_by_title_regex(
-                        re.compile(self.title_regex)
-                    )
-                ) :
-                    return identity
-        except Exception as ex:
-            raise ValueError(f"Could not resolve chat identity of {self}.", self) from ex
+        if self.title_regex:
+            if (
+                identity := await resolver.resolve_chat_by_title_regex(
+                    re.compile(self.title_regex)
+                )
+            ) :
+                return identity
 
         raise ValueError(f"Could not resolve chat identity of {self}.", self)
 
@@ -45,6 +40,7 @@ class ChatDescriptor(Descriptor[ChatIdentity]):
     async def resolve_many(
         cls, resolver: IChatResolver, descriptors: List["ChatDescriptor"]
     ) -> List[ChatIdentity]:
+        # Should not run them asynchronously
         return list(await asyncio.gather(*[c.resolve(resolver) for c in descriptors]))
 
     @root_validator(skip_on_failure=True)
